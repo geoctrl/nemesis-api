@@ -45,6 +45,13 @@ $router->get('artists/{id}', function ($id) use ($router) {
     return response()->json($artist);
 });
 
+$router->get('/artists', function() use ($router) {
+    $artists = DB::table('artists')
+        ->select('artists.*')
+        ->get();
+    return response()->json($artists);
+});
+
 $router->get('albums/{id}', function ($id) use ($router) {
     $artistResults = DB::table('albums')
         ->join('artists', 'albums.artist_id', '=', 'artists.id')
